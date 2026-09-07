@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nima — Design studio software for fashion designers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,340;0,9..144,460;0,9..144,560;1,9..144,460&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+  :root{
+    --muslin:#F1EAE0;
+    --paper:#FBF8F3;
+    --ink:#2B2622;
+    --chalk:#B8AFA3;
+    --chalk-line: rgba(43,38,34,0.18);
+    --thread:#8C2F39;
+    --brass:#A6802E;
+    --max: 1120px;
+  }
+
+  *{ box-sizing:border-box; }
+  body{
+    margin:0;
+    background:var(--muslin);
+    background-image: radial-gradient(var(--chalk-line) 0.6px, transparent 0.6px);
+    background-size:14px 14px;
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{ color:inherit; }
+  img{ max-width:100%; display:block; }
+  .wrap{ max-width:var(--max); margin:0 auto; padding:0 40px; }
+
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    font-weight:560;
+    line-height:1.08;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--thread);
+  }
+
+  ::selection{ background:var(--thread); color:var(--paper); }
+  a:focus-visible, button:focus-visible{ outline:2px solid var(--thread); outline-offset:3px; }
+
+  header{ padding:26px 0; border-bottom:1px solid var(--chalk-line); background:var(--muslin); }
+  .nav{ display:flex; align-items:center; justify-content:space-between; }
+  .wordmark{ font-family:'Fraunces', serif; font-weight:560; font-size:22px; letter-spacing:0.01em; text-decoration:none; }
+  .wordmark span{ color:var(--thread); }
+  .nav-links{ display:flex; align-items:center; gap:36px; list-style:none; margin:0; padding:0; }
+  .nav-links a{ text-decoration:none; font-size:14px; color:var(--ink); border-bottom:1px solid transparent; padding-bottom:2px; }
+  .nav-links a:hover{ border-bottom-color:var(--thread); }
+  .btn{ display:inline-block; font-family:'Inter', sans-serif; font-size:14px; font-weight:500; text-decoration:none; padding:11px 22px; border-radius:2px; border:1px solid var(--ink); }
+  .btn-solid{ background:var(--ink); color:var(--paper); }
+  .btn-solid:hover{ background:var(--thread); border-color:var(--thread); }
+  .btn-line{ border-color:var(--chalk-line); color:var(--ink); }
+  .btn-line:hover{ border-color:var(--ink); }
+
+  .hero{ padding:88px 0 96px; display:grid; grid-template-columns:1fr 460px; gap:64px; align-items:center; }
+  .hero-copy .eyebrow{ margin-bottom:18px; display:block; }
+  .hero h1{ font-size:53px; max-width:11.5ch; }
+  .hero h1 em{ font-style:italic; color:var(--thread); }
+  .hero p.lede{ margin:26px 0 0; max-width:46ch; font-size:17px; color:#4a433d; }
+  .hero-ctas{ margin-top:34px; display:flex; gap:14px; align-items:center; }
+  .hero-note{ margin-top:22px; font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--chalk); }
+
+  .flat-card{ background:var(--paper); border:1px dashed var(--chalk); outline:1px solid var(--chalk-line); outline-offset:6px; padding:28px 20px 18px; position:relative; }
+  .flat-card::after{ content:"✂"; position:absolute; top:-10px; right:6px; font-size:14px; color:var(--chalk); background:var(--muslin); padding:0 4px; }
+  .flat-card-label{ display:flex; justify-content:space-between; font-family:'IBM Plex Mono', monospace; font-size:10.5px; letter-spacing:0.06em; color:var(--chalk); text-transform:uppercase; padding-bottom:14px; border-bottom:1px solid var(--chalk-line); margin-bottom:6px; }
+  .flat-card svg{ width:100%; height:auto; display:block; }
+
+  section{ padding:96px 0; }
+  .section-head{ max-width:640px; margin:0 0 56px; position:relative; padding-left:22px; }
+  .section-head::before{ content:"§"; position:absolute; left:0; top:-2px; color:var(--brass); font-size:24px; font-family:'Fraunces', serif; }
+  .section-head .eyebrow{ margin-bottom:14px; display:block; }
+  .section-head h2{ font-size:36px; padding-bottom:14px; border-bottom:3px double var(--chalk-line); display:inline-block; }
+  .section-head p{ margin:16px 0 0; color:#4a433d; font-size:16px; max-width:52ch; }
+
+  .rule{ border:none; border-top:1px solid var(--chalk-line); margin:0; }
+
+  .pieces{ display:grid; grid-template-columns:repeat(2, 1fr); gap:1px; background:var(--chalk-line); border:1px solid var(--chalk-line); }
+  .piece{ background:var(--paper); padding:36px 34px; position:relative; clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 54%, 3.2% 50%, 0% 46%); }
+  .piece .grain{ display:flex; align-items:center; gap:8px; margin-bottom:22px; }
+  .piece .grain svg{ width:14px; height:34px; flex:none; }
+  .piece .grain span{ font-family:'IBM Plex Mono', monospace; font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase; color:var(--chalk); }
+  .piece h3{ font-size:21px; font-weight:500; margin-bottom:10px; }
+  .piece p{ margin:0; font-size:14.5px; color:#4a433d; max-width:34ch; }
+
+  .process-row{ display:grid; grid-template-columns:repeat(4, 1fr); gap:0; position:relative; }
+  .process-row::before{ content:""; position:absolute; top:17px; left:5%; right:5%; height:1px; background-image:linear-gradient(to right, var(--chalk) 0 6px, transparent 6px 12px); background-size:12px 1px; }
+  .step{ position:relative; padding-right:24px; }
+  .step-num{ width:34px; height:34px; border-radius:50%; background:var(--muslin); border:1px solid var(--ink); display:flex; align-items:center; justify-content:center; font-family:'IBM Plex Mono', monospace; font-size:13px; position:relative; z-index:1; margin-bottom:22px; }
+  .step:nth-child(1) .step-num{ background:var(--thread); color:var(--paper); border-color:var(--thread); }
+  .step h3{ font-size:18px; font-weight:500; margin-bottom:8px; }
+  .step p{ margin:0; font-size:14px; color:#4a433d; max-width:26ch; }
+
+  .swatches{ display:grid; grid-template-columns:repeat(3, 1fr); gap:1px; background:var(--chalk-line); border:1px solid var(--chalk-line); }
+  .swatch{ background:var(--paper); }
+  .swatch-color{ height:132px; border-bottom:1px solid var(--chalk-line); }
+  .sw-1{ background:#EFE6D6; }
+  .sw-2{ background: repeating-linear-gradient(115deg, #40403f 0px, #40403f 2px, #55534e 2px, #55534e 5px); }
+  .sw-3{ background-color:#B2472F; background-image: radial-gradient(#8f3620 1px, transparent 1.4px); background-size:9px 9px; }
+  .sw-4{ background: repeating-linear-gradient(78deg, #33465e 0 3px, #2b3c50 3px 4px, #3a5170 4px 7px); }
+  .sw-5{ background:#E4D9C4; }
+  .sw-6{ background: repeating-linear-gradient(90deg, #6b5a3a 0 4px, #7c6944 4px 5px, #5c4c2f 5px 9px); }
+  .swatch-info{ padding:16px 18px 20px; }
+  .swatch-info .name{ font-size:14.5px; font-weight:500; margin-bottom:3px; }
+  .swatch-info .code{ font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:var(--chalk); }
+
+  .testimonial{ padding:80px 0; background:var(--ink); color:var(--muslin); }
+  .testimonial blockquote{ margin:0 auto; max-width:820px; font-family:'Fraunces', serif; font-style:italic; font-weight:460; font-size:30px; line-height:1.4; text-align:center; }
+  .testimonial blockquote::before{ content:"“"; display:block; font-size:60px; color:var(--thread); line-height:0.5; margin-bottom:14px; font-style:normal; }
+  .testimonial cite{ display:block; margin-top:28px; font-style:normal; font-family:'IBM Plex Mono', monospace; font-size:12.5px; letter-spacing:0.04em; text-align:center; color:var(--chalk); }
+
+  .tiers{ display:grid; grid-template-columns:repeat(3, 1fr); gap:1px; background:var(--chalk-line); border:1px solid var(--chalk-line); }
+  .tier{ background:var(--paper); padding:38px 30px; display:flex; flex-direction:column; }
+  .tier.featured{ background:var(--muslin); box-shadow: inset 0 0 0 1px var(--thread); position:relative; overflow:hidden; }
+  .tier.featured::before{ content:"POPULAR"; position:absolute; top:14px; right:-30px; background:var(--thread); color:var(--paper); font-family:'IBM Plex Mono', monospace; font-size:10px; letter-spacing:0.08em; padding:4px 36px; transform:rotate(45deg); }
+  .tier-name{ font-size:14px; font-weight:500; }
+  .tier-price{ font-family:'Fraunces', serif; font-size:40px; font-weight:500; margin:14px 0 2px; }
+  .tier-price span{ font-family:'Inter', sans-serif; font-size:13px; font-weight:400; color:var(--chalk); }
+  .tier-desc{ font-size:13.5px; color:#4a433d; margin:0 0 26px; }
+  .tier-list{ list-style:none; margin:0 0 30px; padding:0; font-size:13.5px; color:var(--ink); }
+  .tier-list li{ padding:9px 0; border-top:1px solid var(--chalk-line); }
+  .tier-list li:first-child{ border-top:none; }
+  .tier .btn{ text-align:center; margin-top:auto; }
+
+  footer{ border-top:1px solid var(--chalk-line); padding:52px 0 34px; }
+  .foot-top{ display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:32px; padding-bottom:40px; }
+  .foot-brand .wordmark{ font-size:19px; }
+  .foot-brand p{ font-size:13.5px; color:var(--chalk); max-width:30ch; margin:14px 0 0; }
+  .foot-col h4{ font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--chalk); margin:0 0 16px; font-weight:400; }
+  .foot-col ul{ list-style:none; margin:0; padding:0; }
+  .foot-col li{ margin-bottom:11px; }
+  .foot-col a{ text-decoration:none; font-size:14px; }
+  .foot-col a:hover{ color:var(--thread); }
+  .foot-bottom{ border-top:1px solid var(--chalk-line); padding-top:22px; display:flex; justify-content:space-between; font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:var(--chalk); }
+
+  @media (max-width: 860px){
+    .wrap{ padding:0 24px; }
+    .hero{ grid-template-columns:1fr; padding:56px 0 64px; gap:44px; }
+    .hero h1{ font-size:38px; max-width:none; }
+    .nav-links{ display:none; }
+    .pieces{ grid-template-columns:1fr; }
+    .process-row{ grid-template-columns:1fr 1fr; row-gap:36px; }
+    .process-row::before{ display:none; }
+    .swatches{ grid-template-columns:1fr 1fr; }
+    .tiers{ grid-template-columns:1fr; }
+    .foot-top{ grid-template-columns:1fr 1fr; row-gap:32px; }
+    .testimonial blockquote{ font-size:23px; }
+    section{ padding:64px 0; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#" class="wordmark">nima<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="#product">Product</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#fabrics">Fabric library</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+    </ul>
+    <div style="display:flex; gap:12px;">
+      <a href="#" class="btn btn-line">Log in</a>
+      <a href="#pricing" class="btn btn-solid">Start designing</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap" style="display:contents;">
+    <div class="hero-copy">
+      <span class="eyebrow">Design software for independent labels</span>
+      <h1>From first sketch to finished <em>tech pack</em>, in one studio.</h1>
+      <p class="lede">Nima is where designers draft flats, spec every measurement, and organise fabric all the way through to a sample-ready package — without switching between six different tools.</p>
+      <div class="hero-ctas">
+        <a href="#pricing" class="btn btn-solid">Start designing</a>
+        <a href="#process" class="btn btn-line">See how it works</a>
+      </div>
+      <p class="hero-note">No credit card · Export-ready tech packs · Built for small studios</p>
+    </div>
+
+    <div class="hero-visual">
+      <div class="flat-card">
+        <div class="flat-card-label">
+          <span>Style 0142 — A-line dress</span>
+          <span>Scale 1:4</span>
+        </div>
+        <svg viewBox="0 0 400 520" role="img" aria-label="Technical flat sketch of an A-line dress with grainline, notches, and measurement callouts">
+          <defs>
+            <marker id="arrowUp" markerWidth="8" markerHeight="8" refX="4" refY="1" orient="auto">
+              <path d="M0,7 L4,0 L8,7" fill="none" stroke="#2B2622" stroke-width="1"/>
+            </marker>
+            <marker id="arrowDown" markerWidth="8" markerHeight="8" refX="4" refY="7" orient="auto">
+              <path d="M0,0 L4,7 L8,0" fill="none" stroke="#2B2622" stroke-width="1"/>
+            </marker>
+          </defs>
+          <path d="M200,52 Q226,54 240,66 L282,86 Q300,99 295,122 L284,135
+                   L292,258 L324,442 L200,456 L76,442 L108,258 L116,135
+                   L105,122 Q100,99 118,86 L160,66 Q174,54 200,52 Z"
+                fill="#FBF8F3" stroke="#2B2622" stroke-width="1.6" stroke-linejoin="round"/>
+          <line x1="200" y1="60" x2="200" y2="450" stroke="#2B2622" stroke-width="0.75" stroke-dasharray="1 4"/>
+          <text x="204" y="250" font-family="IBM Plex Mono, monospace" font-size="9" fill="#8C2F39" transform="rotate(90 204 250)">CF — CUT ON FOLD</text>
+          <path d="M292,258 L302,262 L292,266 Z" fill="#8C2F39"/>
+          <path d="M108,258 L98,262 L108,266 Z" fill="#8C2F39"/>
+          <line x1="52" y1="150" x2="52" y2="360" stroke="#2B2622" stroke-width="1" marker-start="url(#arrowUp)" marker-end="url(#arrowDown)"/>
+          <text x="40" y="255" font-family="IBM Plex Mono, monospace" font-size="9" fill="#2B2622" transform="rotate(-90 40 255)">GRAIN</text>
+          <line x1="118" y1="140" x2="118" y2="112" stroke="#B8AFA3" stroke-width="0.75"/>
+          <line x1="284" y1="140" x2="284" y2="112" stroke="#B8AFA3" stroke-width="0.75"/>
+          <line x1="118" y1="118" x2="284" y2="118" stroke="#2B2622" stroke-width="0.75"/>
+          <text x="201" y="110" font-family="IBM Plex Mono, monospace" font-size="10" fill="#2B2622" text-anchor="middle">BUST 36"</text>
+          <line x1="330" y1="52" x2="352" y2="52" stroke="#B8AFA3" stroke-width="0.75"/>
+          <line x1="330" y1="456" x2="352" y2="456" stroke="#B8AFA3" stroke-width="0.75"/>
+          <line x1="346" y1="52" x2="346" y2="456" stroke="#2B2622" stroke-width="0.75" marker-start="url(#arrowUp)" marker-end="url(#arrowDown)"/>
+          <text x="352" y="258" font-family="IBM Plex Mono, monospace" font-size="9" fill="#2B2622" transform="rotate(90 352 258)">LENGTH 41.5"</text>
+          <line x1="76" y1="470" x2="324" y2="470" stroke="#B8AFA3" stroke-width="0.75"/>
+          <text x="200" y="486" font-family="IBM Plex Mono, monospace" font-size="10" fill="#2B2622" text-anchor="middle">HEM SWEEP 58"</text>
+          <text x="200" y="504" font-family="IBM Plex Mono, monospace" font-size="9" fill="#B8AFA3" text-anchor="middle">SA 5/8" ALL SEAMS UNLESS NOTED</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section id="product">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Everything before the sample is cut</span>
+      <h2>Four pieces, one pattern.</h2>
+      <p>Each part of Nima is built around a real step in getting a garment made — not a generic feature list.</p>
+    </div>
+    <div class="pieces">
+      <div class="piece">
+        <div class="grain"><svg viewBox="0 0 14 34"><line x1="7" y1="2" x2="7" y2="32" stroke="#B8AFA3" stroke-width="1"/><path d="M2,7 L7,1 L12,7" fill="none" stroke="#B8AFA3" stroke-width="1"/><path d="M2,27 L7,33 L12,27" fill="none" stroke="#B8AFA3" stroke-width="1"/></svg><span>Piece 01</span></div>
+        <h3>Flat sketching</h3>
+        <p>Draft croquis and technical flats on a vector canvas built for garment shapes — darts, seams, and hardware included as real objects.</p>
+      </div>
+      <div class="piece">
+        <div class="grain"><svg viewBox="0 0 14 34"><line x1="7" y1="2" x2="7" y2="32" stroke="#B8AFA3" stroke-width="1"/><path d="M2,7 L7,1 L12,7" fill="none" stroke="#B8AFA3" stroke-width="1"/><path d="M2,27 L7,33 L12,27" fill="none" stroke="#B8AFA3" stroke-width="1"/></svg><span>Piece 02</span></div>
+        <h3>Tech packs</h3>
+        <p>Every flat generates its own spec sheet automatically — measurements, seam allowance, and construction notes, ready to send to a maker.</p>
+      </div>
+      <div class="piece">
+        <div class="grain"><svg viewBox="0 0 14 34"><line x1="7" y1="2" x2="7" y2="32" stroke="#B8AFA3" stroke-width="1"/><path d="M2,7 L7,1 L12,7" fill="none" stroke="#B8AFA3" stroke-width="1"/><path d="M2,27 L7,33 L12,27" fill="none" stroke="#B8AFA3" stroke-width="1"/></svg><span>Piece 03</span></div>
+        <h3>Fabric library</h3>
+        <p>Keep swatches, supplier contacts, fibre content, and minimums in one place, tagged to the styles they belong to.</p>
+      </div>
+      <div class="piece">
+        <div class="grain"><svg viewBox="0 0 14 34"><line x1="7" y1="2" x2="7" y2="32" stroke="#B8AFA3" stroke-width="1"/><path d="M2,7 L7,1 L12,7" fill="none" stroke="#B8AFA3" stroke-width="1"/><path d="M2,27 L7,33 L12,27" fill="none" stroke="#B8AFA3" stroke-width="1"/></svg><span>Piece 04</span></div>
+        <h3>Line sheets</h3>
+        <p>Turn a collection into a clean, shareable sheet for buyers and press — pricing, colourways, and delivery dates included.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="process" style="padding-top:0;">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">A real production sequence</span>
+      <h2>Sketch to shipment.</h2>
+      <p>The order matters — each stage in Nima hands off exactly what the next one needs.</p>
+    </div>
+    <div class="process-row">
+      <div class="step"><div class="step-num">01</div><h3>Sketch</h3><p>Draft the flat and note fabric, trims, and closures.</p></div>
+      <div class="step"><div class="step-num">02</div><h3>Pattern</h3><p>Add grading rules and generate the spec sheet.</p></div>
+      <div class="step"><div class="step-num">03</div><h3>Sample</h3><p>Send the tech pack straight to your sample room.</p></div>
+      <div class="step"><div class="step-num">04</div><h3>Produce</h3><p>Lock the approved spec and issue it for production.</p></div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section id="fabrics">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Sourced, swatched, remembered</span>
+      <h2>A library built for fabric people.</h2>
+      <p>Every swatch keeps its fibre content, weight, and supplier code, so nothing gets reordered from memory.</p>
+    </div>
+    <div class="swatches">
+      <div class="swatch"><div class="swatch-color sw-1"></div><div class="swatch-info"><div class="name">Silk charmeuse — ivory</div><div class="code">FAB-0142 · 19mm</div></div></div>
+      <div class="swatch"><div class="swatch-color sw-2"></div><div class="swatch-info"><div class="name">Wool gabardine — graphite</div><div class="code">FAB-0198 · 280gsm</div></div></div>
+      <div class="swatch"><div class="swatch-color sw-3"></div><div class="swatch-info"><div class="name">Cotton poplin — rust</div><div class="code">FAB-0231 · 120gsm</div></div></div>
+      <div class="swatch"><div class="swatch-color sw-4"></div><div class="swatch-info"><div class="name">Selvedge denim — indigo</div><div class="code">FAB-0276 · 13oz</div></div></div>
+      <div class="swatch"><div class="swatch-color sw-5"></div><div class="swatch-info"><div class="name">Linen — bone</div><div class="code">FAB-0309 · 185gsm</div></div></div>
+      <div class="swatch"><div class="swatch-color sw-6"></div><div class="swatch-info"><div class="name">Corduroy — brass wale</div><div class="code">FAB-0355 · 8-wale</div></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="testimonial">
+  <div class="wrap">
+    <blockquote>We used to lose a week to back-and-forth with our sample room over one wrong measurement. Now the tech pack leaves Nima already correct.</blockquote>
+    Ren Okafor — Founder, Studio Okafor
+  </div>
+</div>
+
+<section id="pricing">
+  <div class="wrap">
+    <div class="section-head" style="margin-left:auto; margin-right:auto; text-align:center; padding-left:0;">
+      <span class="eyebrow">Simple, by studio size</span>
+      <h2>Pricing that grows with your rack.</h2>
+    </div>
+    <div class="tiers">
+      <div class="tier">
+        <div class="tier-name">Studio</div>
+        <div class="tier-price">$29<span> / month</span></div>
+        <p class="tier-desc">For a single designer building their first collection.</p>
+        <ul class="tier-list"><li>Up to 20 styles</li><li>Flat sketching &amp; tech packs</li><li>Fabric library — 100 swatches</li><li>1 line sheet template</li></ul>
+        <a href="#" class="btn btn-line">Start designing</a>
+      </div>
+      <div class="tier featured">
+        <div class="tier-name">Atelier</div>
+        <div class="tier-price">$79<span> / month</span></div>
+        <p class="tier-desc">For a small team shipping seasonal collections.</p>
+        <ul class="tier-list"><li>Unlimited styles</li><li>Grading &amp; size-set specs</li><li>Fabric library — unlimited</li><li>Shared line sheets, 5 seats</li></ul>
+        <a href="#" class="btn btn-solid">Start designing</a>
+      </div>
+      <div class="tier">
+        <div class="tier-name">House</div>
+        <div class="tier-price">Custom</div>
+        <p class="tier-desc">For established labels with a production team.</p>
+        <ul class="tier-list"><li>Everything in Atelier</li><li>Factory &amp; vendor accounts</li><li>Approval workflows</li><li>Dedicated onboarding</li></ul>
+        <a href="#" class="btn btn-line">Talk to us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <a href="#" class="wordmark">nima<span>.</span></a>
+        <p>Design studio software for independent fashion labels — from first sketch to finished spec.</p>
+      </div>
+      <div class="foot-col"><h4>Product</h4><ul><li><a href="#product">Flat sketching</a></li><li><a href="#product">Tech packs</a></li><li><a href="#fabrics">Fabric library</a></li><li><a href="#pricing">Pricing</a></li></ul></div>
+      <div class="foot-col"><h4>Studio</h4><ul><li><a href="#">About</a></li><li><a href="#">Journal</a></li><li><a href="#">Careers</a></li></ul></div>
+      <div class="foot-col"><h4>Support</h4><ul><li><a href="#">Help centre</a></li><li><a href="#">Contact</a></li><li><a href="#">Status</a></li></ul></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 NIMA STUDIO LTD</span>
+      <span>MADE FOR DESIGNERS — NOT FOR ALGORITHMS</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
